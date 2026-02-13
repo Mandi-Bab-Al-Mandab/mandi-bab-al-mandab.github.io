@@ -80,84 +80,102 @@
             font-family: 'Inter', 'Noto Naskh Arabic', sans-serif;
         }
         
-        /* ===== مؤشر الماوس للكمبيوتر ===== */
-        .cursor-dot {
-            width: 8px;
-            height: 8px;
-            background: #c9a227;
-            border-radius: 50%;
-            position: fixed;
-            top: 0;
-            left: 0;
-            pointer-events: none;
-            z-index: 999999;
-            transform: translate(-50%, -50%);
-            box-shadow: 0 0 20px #c9a227, 0 0 40px rgba(201, 162, 39, 0.5);
-            opacity: 1;
-            transition: width 0.1s, height 0.1s, background 0.1s;
+        /* ===== مؤشر الماوس للكمبيوتر فقط - مع التمرير العادي ===== */
+        @media (min-width: 769px) {
+            body {
+                cursor: none !important;
+            }
+            
+            a, button, .dish-card, .special-card, .full-menu-item, .nav-link, .category-btn, .review-card {
+                cursor: none !important;
+            }
+            
+            .cursor-dot {
+                width: 8px;
+                height: 8px;
+                background: #c9a227;
+                border-radius: 50%;
+                position: fixed;
+                top: 0;
+                left: 0;
+                pointer-events: none;
+                z-index: 999999;
+                transform: translate(-50%, -50%);
+                box-shadow: 0 0 20px #c9a227, 0 0 40px rgba(201, 162, 39, 0.5);
+                opacity: 1;
+                transition: width 0.1s, height 0.1s, background 0.1s;
+            }
+            
+            .cursor-outline {
+                width: 40px;
+                height: 40px;
+                border: 2px solid #c9a227;
+                border-radius: 50%;
+                position: fixed;
+                top: 0;
+                left: 0;
+                pointer-events: none;
+                z-index: 999998;
+                transform: translate(-50%, -50%);
+                backdrop-filter: blur(4px);
+                background: rgba(201, 162, 39, 0.1);
+                box-shadow: 0 0 30px rgba(201, 162, 39, 0.3);
+                opacity: 1;
+                transition: width 0.15s, height 0.15s, border 0.15s, background 0.15s;
+            }
+            
+            .cursor-dot.hover {
+                width: 12px;
+                height: 12px;
+                background: #ffd700;
+                box-shadow: 0 0 30px #ffd700, 0 0 60px rgba(255, 215, 0, 0.6);
+            }
+            
+            .cursor-outline.hover {
+                width: 60px;
+                height: 60px;
+                border: 2px solid #ffd700;
+                background: rgba(255, 215, 0, 0.15);
+                box-shadow: 0 0 40px rgba(255, 215, 0, 0.4);
+            }
         }
         
-        .cursor-outline {
-            width: 40px;
-            height: 40px;
-            border: 2px solid #c9a227;
-            border-radius: 50%;
-            position: fixed;
-            top: 0;
-            left: 0;
-            pointer-events: none;
-            z-index: 999998;
-            transform: translate(-50%, -50%);
-            backdrop-filter: blur(4px);
-            background: rgba(201, 162, 39, 0.1);
-            box-shadow: 0 0 30px rgba(201, 162, 39, 0.3);
-            opacity: 1;
-            transition: width 0.15s, height 0.15s, border 0.15s, background 0.15s;
-        }
-        
-        .cursor-dot.hover {
-            width: 12px;
-            height: 12px;
-            background: #ffd700;
-            box-shadow: 0 0 30px #ffd700, 0 0 60px rgba(255, 215, 0, 0.6);
-        }
-        
-        .cursor-outline.hover {
-            width: 60px;
-            height: 60px;
-            border: 2px solid #ffd700;
-            background: rgba(255, 215, 0, 0.15);
-            box-shadow: 0 0 40px rgba(255, 215, 0, 0.4);
-        }
-        
-        /* ===== مؤشر الجوال - نقطة ذهبية تتبع الإصبع ===== */
-        .touch-dot {
-            display: none;
-            width: 12px;
-            height: 12px;
-            background: #c9a227;
-            border-radius: 50%;
-            position: fixed;
-            top: 0;
-            left: 0;
-            pointer-events: none;
-            z-index: 999999;
-            transform: translate(-50%, -50%);
-            box-shadow: 0 0 25px #c9a227, 0 0 45px rgba(201, 162, 39, 0.6);
-            transition: width 0.15s, height 0.15s, background 0.15s;
-        }
-        
-        .touch-dot.active {
-            width: 20px;
-            height: 20px;
-            background: #ffd700;
-            box-shadow: 0 0 35px #ffd700, 0 0 70px rgba(255, 215, 0, 0.7);
+        /* ===== الجوال - لا مؤشر نهائياً ===== */
+        @media (max-width: 768px) {
+            .cursor-dot, .cursor-outline {
+                display: none !important;
+            }
+            body, a, button, .dish-card, .special-card, .full-menu-item, .nav-link, .category-btn, .review-card {
+                cursor: auto !important;
+            }
         }
         
         .nav-glass {
             background: rgba(15, 15, 15, 0.95);
             backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
             border: 1px solid rgba(201, 162, 39, 0.2);
+        }
+        
+        /* ===== موبايل ميني - شفاف تماماً ===== */
+        .mobile-menu {
+            position: fixed;
+            inset: 0;
+            background: rgba(26, 35, 126, 0.85);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            z-index: 9998;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            opacity: 0;
+            visibility: hidden;
+        }
+        
+        .mobile-menu.active {
+            opacity: 1;
+            visibility: visible;
         }
         
         .loader {
@@ -267,7 +285,7 @@
             padding: 1.25rem;
         }
         
-        /* ===== صورة About - متجاوبة مع الجوال ===== */
+        /* ===== صورة About ===== */
         .about-image {
             width: 100%;
             height: 500px;
@@ -421,88 +439,118 @@
         
         /* ===== تحسينات الجوال ===== */
         @media (max-width: 768px) {
-            /* إظهار مؤشر الجوال وإخفاء مؤشر الكمبيوتر */
-            .cursor-dot, .cursor-outline {
-                display: none;
+            /* إلغاء أي مؤشرات */
+            .cursor-dot, .cursor-outline, .touch-dot {
+                display: none !important;
             }
             
-            .touch-dot {
-                display: block;
-            }
-            
-            body, a, button, .dish-card, .special-card, .full-menu-item, .nav-link, .category-btn, .review-card {
-                cursor: default;
-            }
-            
-            /* تكبير الخطوط للجوال */
+            /* تكبير الخطوط */
             html {
-                font-size: 18px;
+                font-size: 16px;
             }
             
-            /* تصغير صورة About */
+            /* صورة About مصغرة */
             .about-image {
-                height: 350px;
+                height: 280px;
             }
             
-            /* تكبير الأزرار */
-            .px-8.py-4 {
-                padding: 1rem 2rem;
-                font-size: 1.1rem;
+            /* صور الأطباق والذبائح أصغر */
+            .dish-image, .special-card-image {
+                height: 160px;
             }
             
-            /* تكبير المسافات */
-            .dish-info, .special-card-content {
-                padding: 1.5rem;
+            /* المنيو الرئيسي - اثنين بجانب اثنين */
+            #menu-grid {
+                display: grid !important;
+                grid-template-columns: repeat(2, 1fr) !important;
+                gap: 0.75rem !important;
             }
             
-            /* تكبير أسماء الأطباق */
+            /* بطاقات المنيو في الجوال */
+            .dish-card {
+                margin-bottom: 0;
+            }
+            
             .dish-name {
-                font-size: 1.4rem;
+                font-size: 0.95rem;
+                margin-bottom: 0.25rem;
             }
             
-            /* تكبير الأسعار */
             .dish-price {
-                font-size: 1.3rem;
+                font-size: 0.9rem;
             }
             
-            /* تحسين شريط التنقل للجوال */
-            .nav-link {
-                font-size: 0.9rem;
+            .dish-info {
+                padding: 0.75rem;
+            }
+            
+            /* الذبائح - اثنين بجانب اثنين */
+            #specials-grid {
+                display: grid !important;
+                grid-template-columns: repeat(2, 1fr) !important;
+                gap: 0.75rem !important;
+            }
+            
+            /* التقييمات - اثنين بجانب اثنين */
+            #reviews-grid {
+                display: grid !important;
+                grid-template-columns: repeat(2, 1fr) !important;
+                gap: 0.75rem !important;
+            }
+            
+            .review-card {
+                padding: 1rem;
+            }
+            
+            .review-text {
+                font-size: 0.8rem;
+                line-height: 1.4;
+            }
+            
+            .review-stars i {
+                font-size: 0.75rem;
+            }
+            
+            /* تحسين شريط التنقل */
+            .nav-glass {
+                padding: 0.5rem;
+            }
+            
+            /* إخفاء بعض الخيارات في الجوال */
+            .hidden\:xs {
+                display: none;
             }
         }
         
         /* تحسينات للأجهزة الصغيرة جداً */
         @media (max-width: 480px) {
-            html {
-                font-size: 16px;
-            }
-            
-            .about-image {
-                height: 280px;
-            }
-            
-            .dish-image, .special-card-image {
-                height: 180px;
-            }
-            
             .dish-name {
-                font-size: 1.2rem;
+                font-size: 0.85rem;
             }
             
             .dish-price {
-                font-size: 1.1rem;
+                font-size: 0.8rem;
+            }
+            
+            .dish-image, .special-card-image {
+                height: 140px;
+            }
+            
+            .special-card-content {
+                padding: 0.75rem;
+            }
+            
+            .special-card-content .dish-name {
+                font-size: 0.85rem;
             }
         }
     </style>
 </head>
 <body class="bg-dark text-light antialiased" dir="ltr">
 
-    <!-- ===== مؤشر الماوس للكمبيوتر ===== -->
+    <!-- ===== مؤشر الماوس للكمبيوتر فقط - يشتغل مع التمرير ===== -->
     <div class="cursor-dot" id="cursor-dot"></div>
     <div class="cursor-outline" id="cursor-outline"></div>
-    
-    <!-- ===== مؤشر الجوال - نقطة ذهبية تتبع الإصبع ===== -->
-    <div class="touch-dot" id="touch-dot"></div>
 
     <!-- ===== LOADER ===== -->
     <div class="loader" id="loader">
@@ -521,7 +569,7 @@
         </div>
     </div>
 
-    <!-- ===== NAVIGATION - مع خيارات إضافية ===== -->
+    <!-- ===== NAVIGATION ===== -->
     <nav class="fixed top-0 left-0 w-full z-50 nav-glass" id="navbar">
         <div class="mx-2 sm:mx-4 mt-2 sm:mt-4 rounded-full px-3 sm:px-6 py-2 sm:py-3 flex items-center justify-between max-w-7xl mx-auto">
             <!-- Logo -->
@@ -565,27 +613,21 @@
                 </a>
             </div>
             
-            <!-- Right Side - خيارات إضافية -->
+            <!-- Right Side - خيارات سريعة -->
             <div class="flex items-center gap-1 sm:gap-2 md:gap-3">
-                <!-- خيارات سريعة للجوال والكمبيوتر -->
-                <a href="https://www.google.com/maps?q=25.2161944,55.3151667" target="_blank" class="hidden sm:flex w-8 h-8 md:w-9 md:h-9 rounded-full border border-white/20 items-center justify-center hover:bg-secondary hover:border-secondary transition-all group" title="Location / الموقع">
+                <!-- Location - سطح المكتب فقط -->
+                <a href="https://www.google.com/maps?q=25.2161944,55.3151667" target="_blank" class="hidden sm:flex w-8 h-8 md:w-9 md:h-9 rounded-full border border-white/20 items-center justify-center hover:bg-secondary hover:border-secondary transition-all group">
                     <i class="fas fa-map-marker-alt text-white/80 group-hover:text-primary text-sm md:text-base"></i>
-                    <span class="sr-only">Location</span>
                 </a>
                 
-                <a href="tel:+971555852724" class="hidden sm:flex w-8 h-8 md:w-9 md:h-9 rounded-full border border-white/20 items-center justify-center hover:bg-secondary hover:border-secondary transition-all group" title="Call / اتصال">
+                <!-- Call - سطح المكتب فقط -->
+                <a href="tel:+971555852724" class="hidden sm:flex w-8 h-8 md:w-9 md:h-9 rounded-full border border-white/20 items-center justify-center hover:bg-secondary hover:border-secondary transition-all group">
                     <i class="fas fa-phone text-white/80 group-hover:text-primary text-sm md:text-base"></i>
-                    <span class="sr-only">Call</span>
                 </a>
                 
-                <a href="#specials" class="hidden sm:flex w-8 h-8 md:w-9 md:h-9 rounded-full border border-white/20 items-center justify-center hover:bg-secondary hover:border-secondary transition-all group" title="Offers / العروض">
-                    <i class="fas fa-tag text-white/80 group-hover:text-primary text-sm md:text-base"></i>
-                    <span class="sr-only">Offers</span>
-                </a>
-                
-                <a href="https://wa.me/971555852724" target="_blank" class="hidden sm:flex w-8 h-8 md:w-9 md:h-9 rounded-full bg-green-600/20 border border-green-600/50 items-center justify-center hover:bg-green-600 transition-all group" title="Order / اطلب">
+                <!-- Order - سطح المكتب فقط -->
+                <a href="https://wa.me/971555852724" target="_blank" class="hidden sm:flex w-8 h-8 md:w-9 md:h-9 rounded-full bg-green-600/20 border border-green-600/50 items-center justify-center hover:bg-green-600 transition-all group">
                     <i class="fab fa-whatsapp text-green-500 group-hover:text-white text-sm md:text-base"></i>
-                    <span class="sr-only">Order</span>
                 </a>
                 
                 <!-- Language Switcher -->
@@ -603,14 +645,29 @@
         </div>
     </nav>
 
-    <!-- Mobile Menu -->
-    <div class="mobile-menu fixed inset-0 bg-primary z-40 flex items-center justify-center hidden" id="mobile-menu">
+    <!-- ===== Mobile Menu - شفاف وblur ===== -->
+    <div class="mobile-menu" id="mobile-menu">
         <div class="text-center">
-            <a href="#about" class="block text-2xl sm:text-3xl font-serif text-white mb-4 sm:mb-6 hover:text-secondary transition-colors mobile-link">من نحن</a>
-            <a href="#menu" class="block text-2xl sm:text-3xl font-serif text-white mb-4 sm:mb-6 hover:text-secondary transition-colors mobile-link">القائمة</a>
-            <a href="#specials" class="block text-2xl sm:text-3xl font-serif text-white mb-4 sm:mb-6 hover:text-secondary transition-colors mobile-link">الذبائح</a>
-            <a href="#reviews" class="block text-2xl sm:text-3xl font-serif text-white mb-4 sm:mb-6 hover:text-secondary transition-colors mobile-link">التقييمات</a>
-            <a href="#contact" class="block text-2xl sm:text-3xl font-serif text-white hover:text-secondary transition-colors mobile-link">اتصل بنا</a>
+            <a href="#about" class="block text-2xl sm:text-3xl font-serif text-white mb-6 hover:text-secondary transition-colors mobile-link">
+                <span class="lang-en">About</span>
+                <span class="lang-ar">من نحن</span>
+            </a>
+            <a href="#menu" class="block text-2xl sm:text-3xl font-serif text-white mb-6 hover:text-secondary transition-colors mobile-link">
+                <span class="lang-en">Menu</span>
+                <span class="lang-ar">القائمة</span>
+            </a>
+            <a href="#specials" class="block text-2xl sm:text-3xl font-serif text-white mb-6 hover:text-secondary transition-colors mobile-link">
+                <span class="lang-en">Sacrifices</span>
+                <span class="lang-ar">الذبائح</span>
+            </a>
+            <a href="#reviews" class="block text-2xl sm:text-3xl font-serif text-white mb-6 hover:text-secondary transition-colors mobile-link">
+                <span class="lang-en">Reviews</span>
+                <span class="lang-ar">التقييمات</span>
+            </a>
+            <a href="#contact" class="block text-2xl sm:text-3xl font-serif text-white hover:text-secondary transition-colors mobile-link">
+                <span class="lang-en">Contact</span>
+                <span class="lang-ar">اتصل بنا</span>
+            </a>
             <div class="flex justify-center gap-4 mt-8">
                 <a href="https://wa.me/971555852724" target="_blank" class="w-10 h-10 rounded-full bg-green-600 flex items-center justify-center">
                     <i class="fab fa-whatsapp text-white text-xl"></i>
@@ -785,7 +842,7 @@
         </div>
     </section>
 
-    <!-- ===== MENU SECTION ===== -->
+    <!-- ===== MENU SECTION - 6 أطباق ===== -->
     <section class="py-16 sm:py-24 bg-gradient-to-b from-dark to-primary/10" id="menu">
         <div class="max-w-7xl mx-auto px-4">
             <div class="text-center mb-12 sm:mb-16">
@@ -800,7 +857,7 @@
                 <div class="section-divider"></div>
             </div>
             
-            <div id="menu-grid" class="grid md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6"></div>
+            <div id="menu-grid" class="grid grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-6"></div>
             
             <div class="text-center mt-12 sm:mt-16">
                 <button onclick="openMenu()" class="px-6 sm:px-10 py-3 sm:py-4 bg-secondary text-primary rounded-full font-bold text-base sm:text-lg uppercase tracking-wider hover:bg-secondary/90 transition-colors">
@@ -812,7 +869,7 @@
         </div>
     </section>
 
-    <!-- ===== SPECIALS SECTION ===== -->
+    <!-- ===== SPECIALS SECTION - 10 ذبائح وصواني ===== -->
     <section class="py-16 sm:py-24 bg-dark" id="specials">
         <div class="max-w-7xl mx-auto px-4">
             <div class="text-center mb-12 sm:mb-16">
@@ -827,11 +884,11 @@
                 <div class="section-divider"></div>
             </div>
             
-            <div id="specials-grid" class="grid md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6"></div>
+            <div id="specials-grid" class="grid grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-6"></div>
         </div>
     </section>
 
-    <!-- ===== REVIEWS SECTION ===== -->
+    <!-- ===== REVIEWS SECTION - بدون فرنسي ===== -->
     <section class="py-16 sm:py-24 bg-gradient-to-b from-dark to-primary/10" id="reviews">
         <div class="max-w-7xl mx-auto px-4">
             <div class="text-center mb-12 sm:mb-16">
@@ -846,9 +903,7 @@
                 <div class="section-divider"></div>
             </div>
             
-            <div id="reviews-grid" class="grid md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
-                <!-- Reviews will be populated by JavaScript -->
-            </div>
+            <div id="reviews-grid" class="grid grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-6"></div>
             
             <div class="text-center mt-8 sm:mt-12">
                 <p class="text-white/50 text-xs sm:text-sm">
@@ -951,7 +1006,7 @@
         </div>
     </section>
 
-    <!-- ===== LOCATION SECTION ===== -->
+    <!-- ===== LOCATION SECTION - خريطة محدثة ===== -->
     <section class="py-16 sm:py-24 bg-dark" id="location">
         <div class="max-w-6xl mx-auto px-4">
             <div class="text-center mb-12 sm:mb-16">
@@ -1054,15 +1109,16 @@
                     </div>
                 </div>
                 
-                <!-- Map -->
-                <div class="rounded-2xl overflow-hidden border border-white/10 h-[300px] sm:h-[400px]">
+                <!-- Map - Mandi Bab Al Mandab -->
+                <div class="rounded-2xl overflow-hidden border border-white/10 h-[300px] sm:h-[400px] shadow-xl">
                     <iframe 
-                        src="https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d3609.0123456789!2d55.3151667!3d25.2161944!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zMjXCsDEyJzU4LjMiTiA1NcKwMTgnNTQuNiJF!5e0!3m2!1sen!2sae!4v1234567890" 
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3609.0123456789!2d55.3151667!3d25.2161944!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3e5f5f5f5f5f5f5f%3A0x0!2zMjXCsDEyJzU4LjMiTiA1NcKwMTgnNTQuNiJF!5e0!3m2!1sen!2sae!4v1700000000000!5m2!1sen!2sae" 
                         width="100%" 
                         height="100%" 
                         style="border:0; filter: grayscale(100%) invert(92%) contrast(83%);" 
                         allowfullscreen="" 
-                        loading="lazy">
+                        loading="lazy"
+                        title="Mandi Bab Al Mandab - Dubai Location">
                     </iframe>
                 </div>
             </div>
@@ -1231,55 +1287,91 @@
     </div>
 
     <script>
-        // ===== قائمة التقييمات =====
+        // ===== قائمة التقييمات - بدون فرنسي =====
         const reviewsData = [
             {
                 text: "Bab Al Mandab Mandi Restaurant is hands down one of the best places in town for authentic Yemeni mandi. The flavors are rich, well-balanced, and deeply traditional, reflecting true Yemeni culinary heritage.",
                 textAr: "مطعم مندي باب المندب بكل بساطة من أفضل الأماكن في المدينة للمندي اليمني الأصيل. النكهات غنية ومتوازنة وتقليدية بعمق، تعكس التراث اليمني الحقيقي.",
                 stars: 5,
                 date: "3 weeks ago",
-                dateAr: "منذ ٣ أسابيع",
-                lang: 'en'
+                dateAr: "منذ ٣ أسابيع"
             },
             {
-                text: "Le service était parfait, la serveuse nous a conseillé sur tous les différents plats. On a pris le meat makhmoud qui était à tomber par terre tellement il était tendre.",
-                textAr: "الخدمة كانت مثالية، نادلة المطعم نصحتنا بجميع الأطباق المختلفة. طلبنا مخمود لحم وكان طرياً بشكل لا يصدق.",
+                text: "The service was perfect, the waitress advised us on all the different dishes. We ordered the meat makhmoud which was incredibly tender and delicious.",
+                textAr: "الخدمة كانت مثالية، النادلة نصحتنا بجميع الأطباق المختلفة. طلبنا مخمود لحم وكان طرياً بشكل لا يصدق ولذيذاً.",
                 stars: 5,
-                date: "3 semaines",
-                dateAr: "منذ ٣ أسابيع",
-                lang: 'fr'
+                date: "3 weeks ago",
+                dateAr: "منذ ٣ أسابيع"
             },
             {
-                text: "تجربة رائعة بكل المقاييس في باب المندب - الجداف. طلبت مخمود لحم وكان اللحم فريش جدا وطعمه مذهل.",
+                text: "An amazing experience by all standards at Bab Al Mandab - Al Jadaf. I ordered meat makhmoud and the meat was very fresh and the taste was amazing.",
                 textAr: "تجربة رائعة بكل المقاييس في باب المندب - الجداف. طلبت مخمود لحم وكان اللحم فريش جدا وطعمه مذهل.",
                 stars: 5,
-                date: "il y a un mois",
-                dateAr: "منذ شهر",
-                lang: 'ar'
+                date: "1 month ago",
+                dateAr: "منذ شهر"
             },
             {
-                text: "من افضل المطاعم اليمنية الي زرتها، اول مرة بجرب المخمود باللحم وطعمه ولا اطيب، الخدمة ممتازة بوجود الكابتن زكريا.",
+                text: "One of the best Yemeni restaurants I've visited, first time trying meat makhmoud and it was delicious, excellent service with Captain Zakaria.",
                 textAr: "من افضل المطاعم اليمنية الي زرتها، اول مرة بجرب المخمود باللحم وطعمه ولا اطيب، الخدمة ممتازة بوجود الكابتن زكريا.",
                 stars: 5,
-                date: "il y a un mois",
-                dateAr: "منذ شهر",
-                lang: 'ar'
+                date: "1 month ago",
+                dateAr: "منذ شهر"
             },
             {
-                text: "If you wish to explore the traditional taste of YAMAN FOOD this restaurant is a great choice. It's a truly family friendly place, and the staff are very knowledgeable.",
+                text: "If you wish to explore the traditional taste of Yemeni food, this restaurant is a great choice. It's a truly family friendly place, and the staff are very knowledgeable.",
                 textAr: "إذا كنت ترغب في استكشاف الطعم التقليدي للطعام اليمني، فهذا المطعم خيار رائع. إنه مكان مناسب للعائلات والموظفين ذوي معرفة عالية.",
                 stars: 5,
                 date: "3 weeks ago",
-                dateAr: "منذ ٣ أسابيع",
-                lang: 'en'
+                dateAr: "منذ ٣ أسابيع"
             },
             {
-                text: "من أجمل المطاعم التي تقدم المأكولات اليمنية الأصيلة بنكهات مميزة. يتميز مطعم باب المندب بتنوع أطباقه وجودة مكوناته الطازجة.",
+                text: "One of the most beautiful restaurants serving authentic Yemeni cuisine with distinctive flavors. Bab Al Mandab restaurant is distinguished by its variety of dishes and the quality of its fresh ingredients.",
                 textAr: "من أجمل المطاعم التي تقدم المأكولات اليمنية الأصيلة بنكهات مميزة. يتميز مطعم باب المندب بتنوع أطباقه وجودة مكوناته الطازجة.",
                 stars: 5,
-                date: "il y a 3 mois",
-                dateAr: "منذ ٣ أشهر",
-                lang: 'ar'
+                date: "3 months ago",
+                dateAr: "منذ ٣ أشهر"
+            },
+            {
+                text: "Great restaurant with delicious food and fast service. Everything we ordered was fresh and full of flavor. The staff are very friendly and helpful. Highly recommended!",
+                textAr: "مطعم رائع مع طعام لذيذ وخدمة سريعة. كل ما طلبناه كان طازجاً ومليئاً بالنكهة. الموظفون ودودون ومتعاونون جداً. أنصح به بشدة!",
+                stars: 5,
+                date: "2 weeks ago",
+                dateAr: "منذ أسبوعين"
+            },
+            {
+                text: "Mashallah, I recommend everyone to visit and try the food. It's very delicious, excellent services, great atmosphere, and a private family section.",
+                textAr: "ماشاءالله انصح الجميع بزيارته وتجربه الأكل لذيذ جدا وخدمات ممتازه والأجواء روعه ومكان خاص للعوائل.",
+                stars: 5,
+                date: "5 months ago",
+                dateAr: "منذ ٥ أشهر"
+            },
+            {
+                text: "I finally tried Mandi Bab Almandab, and the experience was fantastic! I ordered the Chicken Mathbi, and it exceeded all expectations. This is the best mandi I've had in Dubai so far!",
+                textAr: "أخيراً جربت مندي باب المندب، وكانت التجربة رائعة! طلبت المظبي دجاج وكان أفضل من توقعاتي. هذا أفضل مندي جربته في دبي حتى الآن!",
+                stars: 5,
+                date: "7 months ago",
+                dateAr: "منذ ٧ أشهر"
+            },
+            {
+                text: "Clean, organized, spacious place with private Arabic seating. The chicken madhbi is excellent, fresh chicken and perfectly spiced.",
+                textAr: "مكان نظيف ومرتب وشرح وفي جلسات عربيه خاصه. المظبي دجاج ممتاز جدا الدجاج فرش ومبهر عدل.",
+                stars: 5,
+                date: "5 months ago",
+                dateAr: "منذ ٥ أشهر"
+            },
+            {
+                text: "Good atmosphere, with outdoor, indoor & private cabins for the family. Food is delicious and staff are so friendly & kind. Badar & Abdul Majid hosted us till the end.",
+                textAr: "أجواء جميلة، مع جلسات خارجية وداخلية وكبائن خاصة للعائلات. الطعام لذيذ والموظفون ودودون ولطفاء. بدر وعبد المجيد استضافونا حتى النهاية.",
+                stars: 5,
+                date: "1 month ago",
+                dateAr: "منذ شهر"
+            },
+            {
+                text: "An incredible experience in every sense of the word! An authentic Yemeni restaurant that combines real taste, warm atmosphere, and excellent service.",
+                textAr: "تجربة ولا أروع بكل معنى الكلمة! مطعم يمني أصيل جمع بين الطعم الحقيقي والأجواء الدافئة والخدمة الراقية.",
+                stars: 5,
+                date: "1 month ago",
+                dateAr: "منذ شهر"
             }
         ];
 
@@ -1294,14 +1386,8 @@
                 const card = document.createElement('div');
                 card.className = 'review-card';
                 
-                // Determine which text to show based on language
                 const displayText = document.documentElement.dir === 'rtl' ? review.textAr : review.text;
                 const displayDate = document.documentElement.dir === 'rtl' ? review.dateAr : review.date;
-                
-                // Add rtl class for Arabic reviews
-                if (review.lang === 'ar' && document.documentElement.dir === 'rtl') {
-                    card.setAttribute('dir', 'rtl');
-                }
                 
                 let starsHtml = '';
                 for (let i = 0; i < review.stars; i++) {
@@ -1689,42 +1775,6 @@
             renderMenu(cat);
         }
 
-        // ===== تبديل اللغة =====
-        function toggleLanguage() {
-            const html = document.documentElement;
-            
-            if (html.dir === 'ltr') {
-                html.dir = 'rtl';
-                document.getElementById('lang-btn').textContent = 'EN';
-            } else {
-                html.dir = 'ltr';
-                document.getElementById('lang-btn').textContent = 'AR';
-            }
-            
-            displayFeaturedItems();
-            displaySpecials();
-            displayReviews();
-            
-            if (document.getElementById('menuModal').classList.contains('open')) {
-                const activeBtn = document.querySelector('.category-btn.bg-secondary');
-                const category = activeBtn ? activeBtn.textContent.toLowerCase().trim() : 'all';
-                
-                let cat = 'all';
-                if (category.includes('salad')) cat = 'salads';
-                else if (category.includes('appetizer') || category.includes('مقبلات')) cat = 'entrees';
-                else if (category.includes('meat') || category.includes('لحوم')) cat = 'meat';
-                else if (category.includes('chicken') || category.includes('دجاج')) cat = 'chicken';
-                else if (category.includes('fish') || category.includes('سمك')) cat = 'fish';
-                else if (category.includes('popular') || category.includes('شعبيات')) cat = 'popular';
-                else if (category.includes('grill') || category.includes('مشاوي')) cat = 'grilled';
-                else if (category.includes('sweet') || category.includes('حلويات')) cat = 'sweets';
-                else if (category.includes('drink') || category.includes('مشروبات')) cat = 'drinks';
-                else if (category.includes('extra') || category.includes('إضافات')) cat = 'extras';
-                
-                renderMenu(cat);
-            }
-        }
-
         // ===== Mobile Menu Toggle =====
         function initMobileMenu() {
             const mobileToggle = document.getElementById('mobile-toggle');
@@ -1732,21 +1782,22 @@
             
             if (mobileToggle && mobileMenu) {
                 mobileToggle.addEventListener('click', function() {
-                    mobileMenu.classList.toggle('hidden');
+                    mobileMenu.classList.toggle('active');
                 });
                 
-                // Close mobile menu when clicking a link
                 const mobileLinks = mobileMenu.querySelectorAll('a');
                 mobileLinks.forEach(link => {
                     link.addEventListener('click', function() {
-                        mobileMenu.classList.add('hidden');
+                        mobileMenu.classList.remove('active');
                     });
                 });
             }
         }
 
-        // ===== مؤشر الماوس للكمبيوتر =====
+        // ===== مؤشر الماوس للكمبيوتر فقط =====
         function initCursor() {
+            if (window.innerWidth <= 768) return;
+            
             const cursorDot = document.getElementById('cursor-dot');
             const cursorOutline = document.getElementById('cursor-outline');
             
@@ -1785,7 +1836,6 @@
                 cursorOutline.style.opacity = '0';
             });
             
-            // Hover effects
             const hoverElements = document.querySelectorAll('a, button, .dish-card, .special-card, .full-menu-item, .nav-link, .category-btn, .review-card');
             hoverElements.forEach(el => {
                 el.addEventListener('mouseenter', () => {
@@ -1800,50 +1850,6 @@
             });
         }
 
-        // ===== مؤشر الجوال - نقطة ذهبية تتبع الإصبع =====
-        function initTouchCursor() {
-            const touchDot = document.getElementById('touch-dot');
-            if (!touchDot) return;
-            
-            let touchActive = false;
-            
-            document.addEventListener('touchstart', function(e) {
-                if (e.touches.length > 0) {
-                    touchActive = true;
-                    touchDot.style.display = 'block';
-                    const touch = e.touches[0];
-                    touchDot.style.left = touch.clientX + 'px';
-                    touchDot.style.top = touch.clientY + 'px';
-                    touchDot.classList.add('active');
-                }
-            });
-            
-            document.addEventListener('touchmove', function(e) {
-                if (e.touches.length > 0 && touchActive) {
-                    e.preventDefault();
-                    const touch = e.touches[0];
-                    touchDot.style.left = touch.clientX + 'px';
-                    touchDot.style.top = touch.clientY + 'px';
-                }
-            }, { passive: false });
-            
-            document.addEventListener('touchend', function() {
-                touchActive = false;
-                touchDot.classList.remove('active');
-                setTimeout(() => {
-                    touchDot.style.display = 'none';
-                }, 150);
-            });
-            
-            document.addEventListener('touchcancel', function() {
-                touchActive = false;
-                touchDot.classList.remove('active');
-                setTimeout(() => {
-                    touchDot.style.display = 'none';
-                }, 150);
-            });
-        }
-
         // ===== إخفاء اللودر =====
         window.addEventListener('load', function() {
             setTimeout(function() {
@@ -1855,21 +1861,6 @@
             displayReviews();
             initMobileMenu();
             initCursor();
-            initTouchCursor();
-            
-            setTimeout(() => {
-                const hoverElements = document.querySelectorAll('a, button, .dish-card, .special-card, .full-menu-item, .nav-link, .category-btn, .review-card');
-                hoverElements.forEach(el => {
-                    el.addEventListener('mouseenter', () => {
-                        document.getElementById('cursor-dot')?.classList.add('hover');
-                        document.getElementById('cursor-outline')?.classList.add('hover');
-                    });
-                    el.addEventListener('mouseleave', () => {
-                        document.getElementById('cursor-dot')?.classList.remove('hover');
-                        document.getElementById('cursor-outline')?.classList.remove('hover');
-                    });
-                });
-            }, 100);
         });
 
         // ===== إغلاق المودال بالـ ESC =====
@@ -1889,13 +1880,48 @@
                     });
                 }
                 
-                // Close mobile menu if open
                 const mobileMenu = document.getElementById('mobile-menu');
-                if (mobileMenu && !mobileMenu.classList.contains('hidden')) {
-                    mobileMenu.classList.add('hidden');
+                if (mobileMenu && mobileMenu.classList.contains('active')) {
+                    mobileMenu.classList.remove('active');
                 }
             });
         });
+
+        // ===== تبديل اللغة =====
+        window.toggleLanguage = function() {
+            const html = document.documentElement;
+            
+            if (html.dir === 'ltr') {
+                html.dir = 'rtl';
+                document.getElementById('lang-btn').textContent = 'EN';
+            } else {
+                html.dir = 'ltr';
+                document.getElementById('lang-btn').textContent = 'AR';
+            }
+            
+            displayFeaturedItems();
+            displaySpecials();
+            displayReviews();
+            
+            if (document.getElementById('menuModal').classList.contains('open')) {
+                const activeBtn = document.querySelector('.category-btn.bg-secondary');
+                const category = activeBtn ? activeBtn.textContent.toLowerCase().trim() : 'all';
+                
+                let cat = 'all';
+                if (category.includes('salad')) cat = 'salads';
+                else if (category.includes('appetizer') || category.includes('مقبلات')) cat = 'entrees';
+                else if (category.includes('meat') || category.includes('لحوم')) cat = 'meat';
+                else if (category.includes('chicken') || category.includes('دجاج')) cat = 'chicken';
+                else if (category.includes('fish') || category.includes('سمك')) cat = 'fish';
+                else if (category.includes('popular') || category.includes('شعبيات')) cat = 'popular';
+                else if (category.includes('grill') || category.includes('مشاوي')) cat = 'grilled';
+                else if (category.includes('sweet') || category.includes('حلويات')) cat = 'sweets';
+                else if (category.includes('drink') || category.includes('مشروبات')) cat = 'drinks';
+                else if (category.includes('extra') || category.includes('إضافات')) cat = 'extras';
+                
+                renderMenu(cat);
+            }
+        };
     </script>
 </body>
 </html>
